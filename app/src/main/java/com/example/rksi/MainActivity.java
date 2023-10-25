@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             //Задаём иконке кнопки то, чтобы она была по центру и размер выравнивался по высоте
             button_work.setScaleType(ImageButton.ScaleType.FIT_CENTER);
 
-            //Задаём этой кнопку функцию
+            //Задаём этой кнопку функци
             button_work.setOnClickListener(v -> {
                 int x = index;
                 Intent intent = new Intent(v.getContext(), Job.class);
