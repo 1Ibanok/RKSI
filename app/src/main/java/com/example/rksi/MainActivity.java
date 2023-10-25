@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -15,21 +17,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ScrollView scrollView = (ScrollView) findViewById(R.id.scroll);
-
-        for (int i = 0; i<10; i++) {
-            TextView textView = new TextView(this);
-            textView.setText(i);
-            textView.setTextSize(26);
-            scrollView.addView(textView);
+        LinearLayout lay = new LinearLayout(this);
+        lay.setOrientation(LinearLayout.VERTICAL);
+        for (int i = 0; i < 50; i++){
+            TextView view = new TextView(this);
+            view.setText("test" + i);
+            view.setTextSize(15f);
+            lay.addView(view, 300, 100);
         }
-        /* TextView text = (TextView)findViewById(R.id.text);
-
-        String str = new String();
-
-        for (int i = 0; i<100; i++){
-            str = str + "1";
-        }
-        text.setText(str);*/
-
+        scrollView.addView(lay);
     }
 }
