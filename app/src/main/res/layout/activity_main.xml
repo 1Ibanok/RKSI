@@ -21,7 +21,7 @@
             android:layout_alignParentBottom="true"
             android:background="#D9D9D9">
 
-            <View
+            <ImageButton
                 android:id="@+id/rectangle_4"
                 android:layout_width="100dp"
                 android:layout_height="70dp"
@@ -30,9 +30,11 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/main_botton"
+                android:contentDescription=""
+                android:onClick="NextActivity"
                 />
 
-            <View
+            <ImageButton
                 android:id="@+id/rectangle_3"
                 android:layout_width="100dp"
                 android:layout_height="70dp"
@@ -41,16 +43,16 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/main_botton"
+                android:contentDescription=""
+                android:onClick="NextActivity"
                 />
 
     </RelativeLayout>
 
         <View
             android:id="@+id/rectangle_5"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:background="#D9D9D9"
             />

@@ -3,6 +3,7 @@ package com.example.rksi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Application;
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -55,5 +56,10 @@ public class MainActivity extends AppCompatActivity {
             lay.addView(view, width, 100);
         }
         scrollView.addView(lay);
+    }
+
+    public void NextActivity(View view) {
+        Intent intent = new Intent(this, Profile.class);
+        startActivity(intent);
     }
 }
