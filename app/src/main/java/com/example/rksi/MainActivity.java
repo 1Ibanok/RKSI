@@ -97,6 +97,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void login(View view) {
+        Intent intent = new Intent(MainActivity.this, hello_activity.class);
+        startActivity(intent);
+    }
+
     public void Profile(View view) {
         ScrollView JobsView = findViewById(R.id.jobs_scroll);
         JobsView.setVisibility(ScrollView.INVISIBLE);

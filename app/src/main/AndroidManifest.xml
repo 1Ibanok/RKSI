@@ -23,6 +23,7 @@
         </activity>
         <activity android:name="com.example.rksi.create_tiket" />
         <activity android:name="com.example.rksi.Job" />
+        <activity android:name="com.example.rksi.hello_activity" />
     </application>
 
 </manifest>

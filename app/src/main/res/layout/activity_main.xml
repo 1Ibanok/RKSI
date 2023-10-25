@@ -72,6 +72,16 @@
             android:onClick="Create_tiket"
             />
 
+        <ImageButton
+            android:id="@+id/btn2"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/botton_work"
+            android:onClick="login"
+            />
+
         <TextView
             android:id="@+id/viev"
             android:layout_width="140dp"
