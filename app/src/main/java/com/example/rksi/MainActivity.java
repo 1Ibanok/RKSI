@@ -92,6 +92,11 @@ public class MainActivity extends AppCompatActivity {
         JobsView.setVisibility(ScrollView.VISIBLE);
     }
 
+    public void Create_tiket(View view) {
+        Intent intent = new Intent(MainActivity.this, create_tiket.class);
+        startActivity(intent);
+    }
+
     public void Profile(View view) {
         ScrollView JobsView = findViewById(R.id.jobs_scroll);
         JobsView.setVisibility(ScrollView.INVISIBLE);

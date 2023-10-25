@@ -69,6 +69,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:background="@color/gray"
+            android:onClick="Create_tiket"
             />
 
         <TextView
