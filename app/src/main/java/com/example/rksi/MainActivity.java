@@ -70,7 +70,9 @@ public class MainActivity extends AppCompatActivity {
 
             //Задаём этой кнопку функцию
             button_work.setOnClickListener(v -> {
-
+                int x = index;
+                Intent intent = new Intent(v.getContext(), Job.class);
+                startActivity(intent);
             });
 
             //Параметры размера и выравнивания кнопки
@@ -88,17 +90,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void Jobs(View view) {
         ScrollView ProfileView = findViewById(R.id.profile_scroll);
-        ProfileView.setVisibility(ScrollView.INVISIBLE);
-
+        if(ProfileView.getVisibility() == ScrollView.VISIBLE){
+            ProfileView.setVisibility(ScrollView.INVISIBLE);
+        }
         ScrollView JobsView = findViewById(R.id.jobs_scroll);
-        JobsView.setVisibility(ScrollView.VISIBLE);
+        JobsView.setVisibility(JobsView.getVisibility() == ScrollView.INVISIBLE ? ScrollView.VISIBLE : ScrollView.INVISIBLE);
     }
 
     public void Profile(View view) {
         ScrollView JobsView = findViewById(R.id.jobs_scroll);
-        JobsView.setVisibility(ScrollView.INVISIBLE);
-
+        if(JobsView.getVisibility() == ScrollView.VISIBLE){
+            JobsView.setVisibility(ScrollView.INVISIBLE);
+        }
         ScrollView ProfileView = findViewById(R.id.profile_scroll);
-        ProfileView.setVisibility(ScrollView.VISIBLE);
+        ProfileView.setVisibility(ProfileView.getVisibility() == ScrollView.INVISIBLE ? ScrollView.VISIBLE : ScrollView.INVISIBLE);
     }
 }

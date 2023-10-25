@@ -22,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.rksi.Profile" />
+        <activity android:name="com.example.rksi.Job" />
     </application>
 
 </manifest>
