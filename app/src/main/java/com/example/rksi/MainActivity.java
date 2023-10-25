@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.FrameLayout;
+import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -52,14 +53,19 @@ public class MainActivity extends AppCompatActivity {
         RelativeLayout layout = findViewById(R.id.rectangle_1);
 
         ScrollView scrollView = (ScrollView) findViewById(R.id.scroll);
-        LinearLayout lay = new LinearLayout(this);
-        lay.setOrientation(LinearLayout.VERTICAL);
+        GridLayout lay = new GridLayout(this);
+        lay.setOrientation(GridLayout.VERTICAL);
         for (int i = 0; i < 50; i++){
-
             ImageButton button_work = new ImageButton(this);
-            button_work.setImageResource(R.drawable.work);
+            button_work.setBackgroundResource(R.drawable.main_botton);
             button_work.setScaleType(ImageButton.ScaleType.FIT_CENTER);
-            lay.addView(button_work, width, 400);
+
+            GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+            params.width = width - 30;
+            params.height = 400;
+            params.setMargins(15, 15, 15, 15);
+
+            lay.addView(button_work, params);
         }
         scrollView.addView(lay);
     }
