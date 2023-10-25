@@ -33,10 +33,6 @@ public class MainActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_IMMERSIVE;
         decorView.setSystemUiVisibility(uiOptions);
 
-        //Скрываем профиль после загрузки
-        ScrollView pofileScrollView = findViewById(R.id.profile_scroll);
-        pofileScrollView.setVisibility(ScrollView.INVISIBLE);
-
         //Находим размеры дисплея
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
