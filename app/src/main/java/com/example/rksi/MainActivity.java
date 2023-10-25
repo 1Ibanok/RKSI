@@ -65,6 +65,16 @@ public class MainActivity extends AppCompatActivity {
             params.height = 400;
             params.setMargins(15, 15, 15, 15);
 
+            button_work.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    Intent intent = new Intent(v.getContext(), Profile.class);
+                    startActivity(intent);
+                }
+            });
+
             lay.addView(button_work, params);
         }
         scrollView.addView(lay);
