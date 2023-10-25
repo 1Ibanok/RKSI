@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Application;
 import android.content.Intent;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Display;
@@ -13,10 +14,13 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import org.xmlpull.v1.XmlPullParser;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < 50; i++){
 
             ImageButton button_work = new ImageButton(this);
-            //button_work.setForeground(R.drawable.);
+            button_work.setImageResource(R.drawable.work);
+            button_work.setScaleType(ImageButton.ScaleType.FIT_CENTER);
             lay.addView(button_work, width, 400);
         }
         scrollView.addView(lay);
