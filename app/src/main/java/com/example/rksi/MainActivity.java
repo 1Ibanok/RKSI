@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
             String test = "";
             int maks = 0;
             if(maks == 0){
-                test = "Vlad Pidoras";
+                test = "Vlad Pidorasina ebanaya";
             }
         }
     }
