@@ -37,7 +37,26 @@
             android:layout_marginTop="60dp"
             android:layout_alignParentBottom="true">
 
-            
+            <View
+                android:id="@+id/rectangle_6"
+                android:layout_height="377dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="9dp"
+                android:background="@drawable/job_rectangle"
+                android:layout_width="0dp"/>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="15dp"
+                android:textSize="20dp"/>
 
         </RelativeLayout>
     </RelativeLayout>

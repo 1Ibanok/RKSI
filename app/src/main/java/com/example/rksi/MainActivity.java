@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             //Задаём этой кнопку функцию
             button_work.setOnClickListener(v -> {
                 int x = index;
-                Intent intent = new Intent(v.getContext(), Profile.class);
+                Intent intent = new Intent(v.getContext(), Job.class);
                 startActivity(intent);
             });
 
