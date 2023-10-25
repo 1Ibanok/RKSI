@@ -12,7 +12,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         if (true){
 
-            int maks;
+            String test = "";
+            int maks = 0;
+            if(maks == 0){
+                test = "VladPidor";
+            }
         }
     }
 }
