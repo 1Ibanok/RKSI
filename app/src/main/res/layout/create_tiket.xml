@@ -34,8 +34,69 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="60dp"
-            android:layout_alignParentBottom="true">
+            android:layout_marginTop="75dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp">
+
+            <View
+                android:id="@+id/rectangle_6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/rectangle_create_tiket"
+                />
+
+            <EditText
+                android:id="@+id/rectangle_7"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="30dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="30dp"
+                android:background="#FFFFFF"
+                android:textColor="@color/black"
+                android:hint="  Введите название тикета"
+                android:fontFamily="@font/font"
+                />
+
+            <EditText
+                android:id="@+id/rectangle_8"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="30dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="120dp"
+                android:background="#FFFFFF"
+                android:textColor="@color/black"
+                android:hint="  Описание"
+                android:inputType="textMultiLine"
+                android:lines="5"
+                android:fontFamily="@font/font"
+                />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_height="100dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="30dp"
+                android:background="@color/green"
+                android:foreground="@color/green"
+                android:text="Принять"
+                android:fontFamily="@font/font"
+                />
 
 
 

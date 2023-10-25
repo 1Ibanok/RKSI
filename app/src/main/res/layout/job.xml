@@ -55,8 +55,9 @@
                 android:text="Название Работ"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="15dp"
-                android:textSize="40dp"
-                android:fontFamily="@font/font"/>
+                android:textSize="40sp"
+                android:fontFamily="@font/font"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/describtion"
@@ -66,7 +67,8 @@
                 android:layout_marginTop="90dp"
                 android:fontFamily="@font/font"
                 android:text="Описание, ыавпывапывапывапывапывапыавпывапыапыавпывап"
-                android:textSize="20dp" />
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
 
             <ImageButton
                 android:id="@+id/rectangle_7"
