@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v)
                 {
-                    Intent intent = new Intent(MainActivity.this, Job.class);
+                    Intent intent = new Intent(v.getContext(), Profile.class);
                     startActivity(intent);
                 }
             });
@@ -84,6 +84,4 @@ public class MainActivity extends AppCompatActivity {
         ScrollView scrollView = (ScrollView) findViewById(R.id.scroll);
         scrollView.setVisibility(scrollView.getVisibility() == ScrollView.INVISIBLE ? ScrollView.VISIBLE : ScrollView.INVISIBLE);
     }
-
-
 }
