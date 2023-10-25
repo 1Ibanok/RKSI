@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
             });
 
-            //Параметры размера и выравнивания кнопки
+            //Параметры размера и выравнивания кнопк
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.width = width - 30;
             params.height = 400;
