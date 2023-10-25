@@ -32,7 +32,9 @@
                 android:background="@drawable/main_botton"
                 android:contentDescription=""
                 android:onClick="NextActivity"
-                />
+                android:src="@drawable/work"
+                android:scaleType="fitCenter"/>
+
 
             <ImageButton
                 android:id="@+id/rectangle_3"
@@ -45,7 +47,10 @@
                 android:background="@drawable/main_botton"
                 android:contentDescription=""
                 android:onClick="NextActivity"
+                android:src="@drawable/profile_icon"
+                android:scaleType="fitCenter"
                 />
+
 
     </RelativeLayout>
 

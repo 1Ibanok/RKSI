@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -50,10 +51,10 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout lay = new LinearLayout(this);
         lay.setOrientation(LinearLayout.VERTICAL);
         for (int i = 0; i < 50; i++){
-            TextView view = new TextView(this);
-            view.setText(""+i);
-            view.setTextSize(15f);
-            lay.addView(view, width, 100);
+
+            ImageButton button_work = new ImageButton(this);
+            //button_work.setForeground(R.drawable.);
+            lay.addView(button_work, width, 400);
         }
         scrollView.addView(lay);
     }
