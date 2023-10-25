@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             //Задаём этой кнопку функцию
             button_work.setOnClickListener(v -> {
                 int x = index;
-                Intent intent = new Intent(v.getContext(), Job.class);
+                Intent intent = new Intent(v.getContext(), Profile.class);
                 startActivity(intent);
             });
 
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             params.height = 400;
             params.setMargins(15, 15, 15, 15);
 
-            //Добавляем кнопку в лай аут
+            //Добавляем кнопку в лейаут
             lay.addView(button_work, params);
         }
         //Добавляем лайаут в окно прокрутки
