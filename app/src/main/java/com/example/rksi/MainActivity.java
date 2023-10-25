@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -87,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
     public void Jobs(View view) {
         ScrollView ProfileView = findViewById(R.id.profile_scroll);
         ProfileView.setVisibility(ScrollView.INVISIBLE);
-
         ScrollView JobsView = findViewById(R.id.jobs_scroll);
         JobsView.setVisibility(ScrollView.VISIBLE);
     }

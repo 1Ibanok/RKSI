@@ -26,7 +26,6 @@ public class Job extends Activity {
                 | View.SYSTEM_UI_FLAG_LOW_PROFILE
                 | View.SYSTEM_UI_FLAG_IMMERSIVE;
         decorView.setSystemUiVisibility(uiOptions);
-
     }
 
     public void onClickUndoActivity(View view) {
