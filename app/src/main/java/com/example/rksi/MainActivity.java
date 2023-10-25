@@ -1,27 +1,15 @@
 package com.example.rksi;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Application;
 import android.content.Intent;
 import android.graphics.Point;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
-import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
-import org.xmlpull.v1.XmlPullParser;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         View decorView = getWindow().getDecorView(); //скрыть панель навигации
+
+        //Скрываем "чёлку"
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
@@ -43,45 +33,76 @@ public class MainActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_IMMERSIVE;
         decorView.setSystemUiVisibility(uiOptions);
 
+        //Скрываем профиль после загрузки
+        ScrollView pofileScrollView = findViewById(R.id.profile_scroll);
+        pofileScrollView.setVisibility(ScrollView.INVISIBLE);
+
+        //Находим размеры дисплея
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
         int width = size.x;
         int height = size.y;
 
+        //Находим окно прокрутки
+        ScrollView scrollView = findViewById(R.id.jobs_scroll);
 
-        RelativeLayout layout = findViewById(R.id.rectangle_1);
-
-        ScrollView scrollView = (ScrollView) findViewById(R.id.scroll);
+        //Создаём лайаут сетки
         GridLayout lay = new GridLayout(this);
+
+        //Задаём то, что контент сортируется по вертикали
         lay.setOrientation(GridLayout.VERTICAL);
+
         for (int i = 0; i < 60; i++){
+
+            //Создаём переменную отвечающую за индекс кнопки
+            //(почему-то просто из цикла переменные не перевариваются)
+            int index = i;
+
+            //Создаём новую кнопку
             ImageButton button_work = new ImageButton(this);
+
+            //Задаём ей изобрадене заднего фона
             button_work.setBackgroundResource(R.drawable.main_botton);
+
+            //Задаём иконке кнопки то, чтобы она была по центру и размер выравнивался по высоте
             button_work.setScaleType(ImageButton.ScaleType.FIT_CENTER);
 
+            //Задаём этой кнопку функцию
+            button_work.setOnClickListener(v -> {
+                int x = index;
+                Intent intent = new Intent(v.getContext(), Profile.class);
+                startActivity(intent);
+            });
+
+            //Параметры размера и выравнивания кнопки
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.width = width - 30;
             params.height = 400;
             params.setMargins(15, 15, 15, 15);
 
-            button_work.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    Intent intent = new Intent(v.getContext(), Profile.class);
-                    startActivity(intent);
-                }
-            });
-
+            //Добавляем кнопку в лайаут
             lay.addView(button_work, params);
         }
+        //Добавляем лайаут в окно прокрутки
         scrollView.addView(lay);
     }
 
-    public void NextActivity(View view) {
-        ScrollView scrollView = (ScrollView) findViewById(R.id.scroll);
-        scrollView.setVisibility(scrollView.getVisibility() == ScrollView.INVISIBLE ? ScrollView.VISIBLE : ScrollView.INVISIBLE);
+    public void Jobs(View view) {
+        ScrollView ProfileView = findViewById(R.id.profile_scroll);
+        if(ProfileView.getVisibility() == ScrollView.VISIBLE){
+            ProfileView.setVisibility(ScrollView.INVISIBLE);
+        }
+        ScrollView JobsView = findViewById(R.id.jobs_scroll);
+        JobsView.setVisibility(JobsView.getVisibility() == ScrollView.INVISIBLE ? ScrollView.VISIBLE : ScrollView.INVISIBLE);
+    }
+
+    public void Profile(View view) {
+        ScrollView JobsView = findViewById(R.id.jobs_scroll);
+        if(JobsView.getVisibility() == ScrollView.VISIBLE){
+            JobsView.setVisibility(ScrollView.INVISIBLE);
+        }
+        ScrollView ProfileView = findViewById(R.id.profile_scroll);
+        ProfileView.setVisibility(ProfileView.getVisibility() == ScrollView.INVISIBLE ? ScrollView.VISIBLE : ScrollView.INVISIBLE);
     }
 }
