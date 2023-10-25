@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void NextActivity(View view) {
-        Intent intent = new Intent(this, Profile.class);
-        startActivity(intent);
+        ScrollView scrollView = (ScrollView) findViewById(R.id.scroll);
+        scrollView.setVisibility(scrollView.getVisibility() == ScrollView.INVISIBLE ? ScrollView.VISIBLE : ScrollView.INVISIBLE);
     }
 }
