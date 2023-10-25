@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.width = width - 30;
             params.height = 400;
-            params.setMargins(15, 15, 15, 15);
+            params.setMargins(10, 10, 10, 10);
 
             //Добавляем кнопку в лейаут
             lay.addView(button_work, params);

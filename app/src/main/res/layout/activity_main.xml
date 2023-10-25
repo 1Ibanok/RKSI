@@ -106,7 +106,8 @@
                             android:textStyle="bold"
                             android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="40sp"/>
+                            android:textSize="40sp"
+                            android:fontFamily="@font/font"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -116,7 +117,8 @@
                             android:textStyle="italic"
                             android:textAlignment="textStart"
                             android:textColor="@color/black"
-                            android:textSize="30sp"/>
+                            android:textSize="30sp"
+                            android:fontFamily="@font/font"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -126,7 +128,8 @@
                             android:textStyle="bold"
                             android:textAlignment="textStart"
                             android:textColor="@color/black"
-                            android:textSize="30sp"/>
+                            android:textSize="30sp"
+                            android:fontFamily="@font/font"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -136,7 +139,8 @@
                             android:textStyle="bold"
                             android:textAlignment="textStart"
                             android:textColor="@color/black"
-                            android:textSize="30sp"/>
+                            android:textSize="30sp"
+                            android:fontFamily="@font/font"/>
                     </GridLayout>
 
                     <GridLayout
@@ -154,7 +158,8 @@
                             android:textStyle="bold"
                             android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="40sp"/>
+                            android:textSize="40sp"
+                            android:fontFamily="@font/font"/>
 
                     </GridLayout>
                 </GridLayout>
