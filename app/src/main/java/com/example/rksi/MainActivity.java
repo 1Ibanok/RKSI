@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         ScrollView scrollView = (ScrollView) findViewById(R.id.scroll);
         GridLayout lay = new GridLayout(this);
         lay.setOrientation(GridLayout.VERTICAL);
-        for (int i = 0; i < 50; i++){
+        for (int i = 0; i < 60; i++){
             ImageButton button_work = new ImageButton(this);
             button_work.setBackgroundResource(R.drawable.main_botton);
             button_work.setScaleType(ImageButton.ScaleType.FIT_CENTER);
