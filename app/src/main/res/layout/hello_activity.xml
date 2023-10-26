@@ -145,7 +145,8 @@
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
                     android:layout_marginTop="60dp"
-                    android:background="@drawable/job_button" />
+                    android:background="@drawable/job_button"
+                    android:contentDescription="@android:string/no"/>
 
                 <ImageButton
                     android:id="@+id/button_to_login"
