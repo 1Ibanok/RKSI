@@ -152,10 +152,10 @@ public class MainActivity extends AppCompatActivity {
             name.setTextSize(35);
             name.setTextColor(R.color.black);
 
-            rlay.addView(name, params);
+            int name_height = name.getHeight();
+            int name_width = name.getWidth();
 
-            params.setMargins(15, 200, 0, 20);
-            contakt.setTextColor(R.color.black);
+            rlay.addView(name, params);
 
             lay.addView(rlay);
         }
