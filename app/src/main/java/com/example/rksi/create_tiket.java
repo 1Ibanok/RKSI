@@ -2,6 +2,7 @@ package com.example.rksi;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -9,6 +10,7 @@ import android.widget.GridLayout;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,7 +40,7 @@ public class create_tiket extends Activity {
     }
 
     public void SendTiket(View view){
-        DatabaseReference TiketsBD = FirebaseDatabase.getInstance("https://rksi-2e196-default-rtdb.europe-west1.firebasedatabase.app/").getReference("TIKETS");
+        DatabaseReference TiketsBD = FirebaseDatabase.getInstance().getReference("TICKETS");
 
         EditText Name_tiket = findViewById(R.id.name);
         EditText Describtion_tiket = findViewById(R.id.describtion);
@@ -46,19 +48,16 @@ public class create_tiket extends Activity {
         String name_tiket = Name_tiket.getText().toString();
         String describtion_tiket = Describtion_tiket.getText().toString();
 
-        Tiket tiket = new Tiket(name_tiket, describtion_tiket,"EMAIL");
+        SharedPreferences sharedPref = this.getSharedPreferences("user_data", this.MODE_PRIVATE);
+        User user = User.FromJson(sharedPref.getString("user_data1", ""));
+        String email_user = user.email;
 
-        TiketsBD.push().setValue(tiket);
+        Tiket tiket = new Tiket(name_tiket, describtion_tiket, email_user);
 
-        TiketsBD.addValueEventListener(new ValueEventListener() {
+        TiketsBD.push().setValue(tiket).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                // Сделать уведомлние что все хорошо
+            public void onSuccess(Void unused) {
                 finish();
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Сделать уведомлние что все плохо
             }
         });
     }

@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private int width;
     private int height;
     private User user;
+
+    private DatabaseReference mDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_LOW_PROFILE
                 | View.SYSTEM_UI_FLAG_IMMERSIVE;
         decorView.setSystemUiVisibility(uiOptions);
-        Button button = findViewById(R.id.btn_tick);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         //Находим размеры дисплея
         Display display = getWindowManager().getDefaultDisplay();
