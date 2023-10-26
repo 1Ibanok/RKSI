@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
             //Добавляем кнопку в лейаут
             lay.addView(button_work, params);
         }
-        //Добавляем лайаут в окно прокрутки
+        //Добавляем лайаут в окно прокрутк
         scrollView.addView(lay);
     }
 
