@@ -81,19 +81,17 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     if (ds.getValue().toString().trim() != "") {
                         Tiket tiket;
-                        Log.i("asdasdasfa", "|"+ ds.getValue().toString());
                         tiket = ds.getValue(Tiket.class);
                         if (tiket != null) {
                             list.add(tiket);
                             keys.add(ds.getKey());
-                            Log.i("sdgkl;gfkgl''",tiket.getEmail_user());
-                            if (tiket.getEmail_user() == user.email) {
+                            if(tiket.isMine(user.email)){
                                 your_tikets.add(tiket);
                             }
                         }
                     }
                 }
-                Log.i("sdgkl;gfkgl''",your_tikets.toString());
+                Log.i("sdgkl;gfkgl''", your_tikets.toString());
                 Refresh();
             }
 
