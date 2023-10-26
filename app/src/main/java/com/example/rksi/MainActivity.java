@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
             //(почему-то просто из цикла переменные не перевариваются)
             int index = i;
 
-            //Создаём новую кнопку
+            //Создаём новую кнопк
             ImageButton button_work = new ImageButton(this);
 
             //Задаём ей изобрадене заднего фона
