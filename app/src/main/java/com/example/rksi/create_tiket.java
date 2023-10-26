@@ -56,6 +56,7 @@ public class create_tiket extends Activity {
         tiket.setName(name_tiket);
         tiket.setDescription(describtion_tiket);
         tiket.setEmail_user(email_user);
+        tiket.setDoing_by("");
 
         TiketsBD.push().setValue(tiket).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

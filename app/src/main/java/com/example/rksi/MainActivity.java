@@ -88,16 +88,7 @@ public class MainActivity extends AppCompatActivity {
         width = size.x;
         height = size.y;
 
-        Refresh();
-
     }
-
-    private List<Tiket> getTiketsFromBD(){
-        List<Tiket> list = new ArrayList<>();
-
-        return  list;
-    }
-
     public void Refresh(){
 
         //Находим окно прокрутки
@@ -143,53 +134,6 @@ public class MainActivity extends AppCompatActivity {
         //Добавляем лайаут в окно прокрутки
         scrollView.addView(lay);
     }
-
-    public void Refresh(View view){
-        //Находим окно прокрутки
-        ScrollView scrollView = findViewById(R.id.jobs_scroll);
-
-        //Создаём лайаут сетки
-        GridLayout lay = new GridLayout(this);
-
-        //Задаём то, что контент сортируется по вертикали
-        lay.setOrientation(GridLayout.VERTICAL);
-        lay.removeAllViews();
-        for (int i = 0; i < 60; i++){
-
-            //Создаём переменную отвечающую за индекс кнопки
-            //(почему-то просто из цикла переменные не перевариваются)
-            int index = i;
-
-            //Создаём новую кнопк
-            ImageButton button_work = new ImageButton(this);
-
-            //Задаём ей изобрадене заднего фона
-            button_work.setBackgroundResource(R.drawable.botton_work);
-
-            //Задаём иконке кнопки то, чтобы она была по центру и размер выравнивался по высоте
-            button_work.setScaleType(ImageButton.ScaleType.FIT_CENTER);
-
-            //Задаём этой кнопку функци
-            button_work.setOnClickListener(v -> {
-                int x = index;
-                Intent intent = new Intent(v.getContext(), Job.class);
-                startActivity(intent);
-            });
-
-            //Параметры размера и выравнивания кнопки
-            GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-            params.width = width - 30;
-            params.height = 400;
-            params.setMargins(10, 10, 10, 10);
-
-            //Добавляем кнопку в лейаут
-            lay.addView(button_work, params);
-        }
-        //Добавляем лайаут в окно прокрутк
-        scrollView.addView(lay);
-    }
-
-
 
     public void Jobs(View view) {
         ScrollView ProfileView = findViewById(R.id.profile_scroll);
