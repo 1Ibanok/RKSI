@@ -31,7 +31,7 @@ android {
 
 dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.4.0"))
-
+    implementation("com.google.firebase:firebase-messaging")
     implementation("com.google.code.gson:gson:2.8.6")
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("androidx.appcompat:appcompat:1.6.1")
