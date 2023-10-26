@@ -43,7 +43,7 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginBottom="15dp"
-                android:background="@drawable/rectangle_create_tiket"
+                android:background="@drawable/rectangle_main"
                 />
 
             <GridLayout
@@ -80,8 +80,10 @@
                     android:layout_marginTop="30dp"
                     android:background="#FFFFFF"
                     android:textColor="@color/black"
+                    android:textColorHint="@color/w_black"
                     android:hint="  Имя"
                     android:fontFamily="@font/font"
+
                     />
 
                 <EditText
@@ -93,6 +95,7 @@
                     android:layout_marginTop="30dp"
                     android:background="#FFFFFF"
                     android:textColor="@color/black"
+                    android:textColorHint="@color/w_black"
                     android:hint="  Фамилия"
                     android:fontFamily="@font/font"
                     />
@@ -106,6 +109,7 @@
                     android:layout_marginTop="30dp"
                     android:background="#FFFFFF"
                     android:textColor="@color/black"
+                    android:textColorHint="@color/w_black"
                     android:hint="  Почта"
                     android:fontFamily="@font/font"
                     android:inputType="textEmailAddress"
@@ -120,6 +124,7 @@
                     android:layout_marginTop="30dp"
                     android:background="#FFFFFF"
                     android:textColor="@color/black"
+                    android:textColorHint="@color/w_black"
                     android:hint="  Телефон"
                     android:fontFamily="@font/font"
                     />
@@ -133,6 +138,7 @@
                     android:layout_marginTop="30dp"
                     android:background="#FFFFFF"
                     android:textColor="@color/black"
+                    android:textColorHint="@color/w_black"
                     android:hint="  Пароль"
                     android:fontFamily="@font/font"
                     android:inputType="textPassword"
@@ -194,6 +200,7 @@
                     android:layout_marginRight="30dp"
                     android:layout_marginTop="30dp"
                     android:background="#FFFFFF"
+                    android:textColorHint="@color/w_black"
                     android:textColor="@color/black"
                     android:hint="  Почта"
                     android:fontFamily="@font/font"
@@ -208,6 +215,7 @@
                     android:layout_marginRight="30dp"
                     android:layout_marginTop="30dp"
                     android:background="#FFFFFF"
+                    android:textColorHint="@color/w_black"
                     android:textColor="@color/black"
                     android:hint="  Пароль"
                     android:fontFamily="@font/font"
