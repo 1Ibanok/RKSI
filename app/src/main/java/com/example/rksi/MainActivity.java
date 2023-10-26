@@ -67,23 +67,27 @@ public class MainActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance();
         TiketsBD = mDatabase.getReference("TICKETS");
-        user = User.FromJson(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
         list = new ArrayList<>();
         keys = new ArrayList<>();
         your_tikets = new ArrayList<>();
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                user = User.FromJson(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
                 list.clear();
                 keys.clear();
                 your_tikets.clear();
-                for (DataSnapshot ds : snapshot.getChildren()){
-                    Tiket tiket = ds.getValue(Tiket.class);
-                    if(tiket != null){
-                        list.add(tiket);
-                        keys.add(ds.getKey());
-                        if(tiket.getEmail_user() == user.email){
-                            your_tikets.add(tiket);
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    if (ds.getValue().toString().trim() != "") {
+                        Tiket tiket;
+                        Log.i("asdasdasfa", "|"+ ds.getValue().toString());
+                        tiket = ds.getValue(Tiket.class);
+                        if (tiket != null) {
+                            list.add(tiket);
+                            keys.add(ds.getKey());
+                            if (tiket.getEmail_user() == user.email) {
+                                your_tikets.add(tiket);
+                            }
                         }
                     }
                 }
@@ -109,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void DenyTicketFunk(){
+        user = User.FromJson(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
         if(user.id_job != "") {
             TiketsBD.child(user.id_job).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                 @Override
@@ -134,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
                             }
                         });
+
                         OpenJobs();
                     }
                 }

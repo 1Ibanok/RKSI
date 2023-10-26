@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -55,7 +56,6 @@ public class Job extends Activity {
         id = arguments.get("ticket_id").toString();
 
         user_d = FirebaseAuth.getInstance().getCurrentUser();
-        user = User.FromJson(user_d.getDisplayName());
         mDatabase = FirebaseDatabase.getInstance();
         TiketsBD = mDatabase.getReference("TICKETS");
     }
@@ -63,25 +63,28 @@ public class Job extends Activity {
     public void onClickUndoActivity(View view) {
         finish();
     }
-    public void DenyTicketFunk(){
-        if(user.id_job != "") {
-            TiketsBD.child(user.id_job).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+    public void AcceptTiket(View view) {
+        user = User.FromJson(user_d.getDisplayName());
+        Log.i("asfafmflnklfdkl", "||||" + user.id_job);
+        Log.i("asfafmflnklfdkl", "||||ID" + id);
+        if(id != user.id_job && user.id_job.trim().isEmpty()) {
+            TiketsBD.child(id).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                 @Override
                 public void onSuccess(DataSnapshot dataSnapshot) {
-                    if(dataSnapshot.getValue(Tiket.class) != null) {
+                    if (dataSnapshot.getValue(Tiket.class) != null) {
                         Tiket tiket = dataSnapshot.getValue(Tiket.class);
-                        tiket.setDoing_by("");
-                        TiketsBD.child(user.id_job).setValue(tiket);
+                        tiket.setDoing_by(user.email);
+                        TiketsBD.child(id).setValue(tiket);
 
-                        user.id_job = "";
+                        user.id_job = id;
                         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                 .setDisplayName(User.Export(user))
                                 .setPhotoUri(null)
                                 .build();
-                        FirebaseAuth.getInstance().getCurrentUser().updateProfile(profileUpdates).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        user_d.updateProfile(profileUpdates).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-
+                                finish();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -90,41 +93,6 @@ public class Job extends Activity {
                             }
                         });
                     }
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-
-                }
-            });
-        }
-    }
-    public void AcceptTiket(View view) {
-        if(user.id_job != id) {
-            DenyTicketFunk();
-            TiketsBD.child(id).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-                @Override
-                public void onSuccess(DataSnapshot dataSnapshot) {
-                    Tiket tiket = dataSnapshot.getValue(Tiket.class);
-                    tiket.setDoing_by(user.email);
-                    TiketsBD.child(id).setValue(tiket);
-
-                    user.id_job = id;
-                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                            .setDisplayName(User.Export(user))
-                            .setPhotoUri(null)
-                            .build();
-                    user_d.updateProfile(profileUpdates).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            finish();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-
-                        }
-                    });
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
