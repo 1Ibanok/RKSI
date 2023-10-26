@@ -218,6 +218,7 @@ public class MainActivity extends AppCompatActivity {
         ProfileView.setVisibility(ScrollView.VISIBLE);
 
         TextView NameView = findViewById(R.id.user_name);
+        TextView CoinView = findViewById(R.id.user_coin);
         TextView EmailView = findViewById(R.id.user_email);
         TextView PhoneView = findViewById(R.id.user_phone);
 
@@ -225,8 +226,9 @@ public class MainActivity extends AppCompatActivity {
         user = User.FromJson(sharedPref.getString("user_data1", ""));
 
         NameView.setText(user.second_name + " " + user.first_name);
-        EmailView.setText(user.email);
-        PhoneView.setText(user.phone);
+        CoinView.setText("Coins: " + user.coin);
+        EmailView.setText("Почта: " + user.email);
+        PhoneView.setText("Телефон: " + user.phone);
     }
 
     public void LogOut(View view) {
