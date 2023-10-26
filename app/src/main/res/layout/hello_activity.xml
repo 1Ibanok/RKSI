@@ -164,6 +164,17 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/mini_button"
                     android:onClick="toLogin"/>
+
+                <TextView
+                    android:id="@+id/registration_failed_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="140dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="-30dp"
+                    android:textColor="@color/red"
+                    android:textSize="10sp"
+                    android:onClick="toLogin"/>
             </GridLayout>
 
             <GridLayout
@@ -241,6 +252,16 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/main_botton"
                     android:onClick="toRegistration"/>
+                <TextView
+                    android:id="@+id/login_failed_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="140dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="-30dp"
+                    android:textColor="@color/red"
+                    android:textSize="10sp"
+                    android:onClick="toLogin"/>
             </GridLayout>
 
         </RelativeLayout>

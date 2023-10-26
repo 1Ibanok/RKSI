@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.widget.GridLayout;
@@ -15,9 +16,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,11 +35,12 @@ public class MainActivity extends AppCompatActivity {
 
     private int width;
     private int height;
-    private User user;
+    public static User user;
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference TiketsBD;
     List<Tiket> list;
+    List<Tiket> your_tikets;
     List<String> keys;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,11 +70,15 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
                 keys.clear();
+                your_tikets.clear();
                 for (DataSnapshot ds : snapshot.getChildren()){
                     Tiket tiket = ds.getValue(Tiket.class);
                     if(tiket != null){
                         list.add(tiket);
                         keys.add(ds.getKey());
+                        if(tiket.getEmail_user() == user.email){
+                            your_tikets.add(tiket);
+                        }
                     }
                 }
                 Refresh();
@@ -88,7 +97,47 @@ public class MainActivity extends AppCompatActivity {
         display.getSize(size);
         width = size.x;
         height = size.y;
+    }
+    public void DenyTicket(View view){
+        DenyTicketFunk();
+    }
 
+    public void DenyTicketFunk(){
+        if(user.id_job != "") {
+            TiketsBD.child(user.id_job).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                @Override
+                public void onSuccess(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.getValue(Tiket.class) != null) {
+                        Tiket tiket = dataSnapshot.getValue(Tiket.class);
+                        tiket.setDoing_by("");
+                        TiketsBD.child(user.id_job).setValue(tiket);
+
+                        user.id_job = "";
+                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                .setDisplayName(User.Export(user))
+                                .setPhotoUri(null)
+                                .build();
+                        FirebaseAuth.getInstance().getCurrentUser().updateProfile(profileUpdates).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+
+                            }
+                        });
+                        OpenJobs();
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                }
+            });
+        }
     }
     public void Refresh(){
 
@@ -120,6 +169,9 @@ public class MainActivity extends AppCompatActivity {
             button_work.setOnClickListener(v -> {
                 int x = index;
                 Intent intent = new Intent(v.getContext(), Job.class);
+                intent.putExtra("ticket_name", list.get(x).getName());
+                intent.putExtra("ticket_description", list.get(x).getDescription());
+                intent.putExtra("ticket_id", keys.get(x));
                 startActivity(intent);
             });
 
@@ -136,15 +188,11 @@ public class MainActivity extends AppCompatActivity {
         scrollView.addView(lay);
     }
 
-    public void OpenJobWindow(String key){
-        ScrollView ProfileView = findViewById(R.id.profile_scroll);
-        ProfileView.setVisibility(ScrollView.INVISIBLE);
-
-        ScrollView JobsView = findViewById(R.id.jobs_scroll);
-        JobsView.setVisibility(ScrollView.INVISIBLE);
+    public void Jobs(View view) {
+        OpenJobs();
     }
 
-    public void Jobs(View view) {
+    public void OpenJobs(){
         ScrollView ProfileView = findViewById(R.id.profile_scroll);
         ProfileView.setVisibility(ScrollView.INVISIBLE);
 
@@ -164,6 +212,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Profile(View view) {
+        UpdateProfile();
+    }
+
+    public void UpdateProfile(){
         ScrollView JobsView = findViewById(R.id.jobs_scroll);
         JobsView.setVisibility(ScrollView.INVISIBLE);
 
@@ -175,13 +227,34 @@ public class MainActivity extends AppCompatActivity {
         TextView EmailView = findViewById(R.id.user_email);
         TextView PhoneView = findViewById(R.id.user_phone);
 
-        SharedPreferences sharedPref = this.getSharedPreferences("user_data", this.MODE_PRIVATE);
-        user = User.FromJson(sharedPref.getString("user_data1", ""));
+        TextView CurrentJob = findViewById(R.id.current_job);
+        user = User.FromJson(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
 
         NameView.setText(user.second_name + " " + user.first_name);
         CoinView.setText("Coins: " + user.coin);
         EmailView.setText("Почта: " + user.email);
         PhoneView.setText("Телефон: " + user.phone);
+
+        CurrentJob.setText("Текущее задание:\nОтсутствует");
+
+        if(user.id_job != ""){
+            TiketsBD.child(user.id_job).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                @Override
+                public void onSuccess(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.getValue(Tiket.class).getName() != null) {
+                        CurrentJob.setText("Текущее задание:\n" + dataSnapshot.getValue(Tiket.class).getName());
+                    }
+                    else{
+                        CurrentJob.setText("Текущее задание:\nОтсутствует");
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    CurrentJob.setText("Текущее задание:\nОтсутствует");
+                }
+            });
+        }
     }
 
     public void LogOut(View view) {

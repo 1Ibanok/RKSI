@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,8 +20,6 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 public class hello_activity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseUser user;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +39,6 @@ public class hello_activity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_LOW_PROFILE
                 | View.SYSTEM_UI_FLAG_IMMERSIVE;
         decorView.setSystemUiVisibility(uiOptions);
-
-        sharedPreferences = this.getSharedPreferences("user_data", this.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
 
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
@@ -68,6 +64,8 @@ public class hello_activity extends AppCompatActivity {
 
         String user_data = User.Export(user_parse);
 
+        TextView error_view = findViewById(R.id.registration_failed_text);
+
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
             if(task.isSuccessful()){
                 user = auth.getCurrentUser();
@@ -87,13 +85,16 @@ public class hello_activity extends AppCompatActivity {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 user.delete();
+                                error_view.setText("Ошибка: " + e);
                             }
+
                         });
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         user.delete();
+                        error_view.setText("Ошибка: " + e);
                     }
                 });
             }
@@ -107,10 +108,13 @@ public class hello_activity extends AppCompatActivity {
         String email = Email.getText().toString();
         String password = Password.getText().toString();
 
+        TextView error_view = findViewById(R.id.login_failed_text);
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
             if(auth.getCurrentUser().isEmailVerified()) {
                 LogIn();
             }
+        }).addOnFailureListener(e -> {
+            error_view.setText("Ошибка: " + e);
         });
     }
 
@@ -132,8 +136,6 @@ public class hello_activity extends AppCompatActivity {
 
     public void LogIn(){
         user = auth.getCurrentUser();
-        editor.putString("user_data1", user.getDisplayName());
-        editor.commit();
         Intent intent = new Intent(hello_activity.this, MainActivity.class);
         startActivity(intent);
         finish();

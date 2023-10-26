@@ -11,6 +11,7 @@ import android.widget.GridLayout;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -48,8 +49,7 @@ public class create_tiket extends Activity {
         String name_tiket = Name_tiket.getText().toString();
         String describtion_tiket = Describtion_tiket.getText().toString();
 
-        SharedPreferences sharedPref = this.getSharedPreferences("user_data", this.MODE_PRIVATE);
-        User user = User.FromJson(sharedPref.getString("user_data1", ""));
+        User user = User.FromJson(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
         String email_user = user.email;
 
         Tiket tiket = new Tiket();
