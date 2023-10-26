@@ -45,7 +45,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="9dp"
-                android:background="@drawable/job_rectangle"
+                android:background="@drawable/rectangle_main"
                 android:layout_width="0dp" />
 
             <TextView
