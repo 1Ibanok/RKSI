@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             ImageButton button_work = new ImageButton(this);
 
             //Задаём ей изобрадене заднего фона
-            button_work.setBackgroundResource(R.drawable.botton_work);
+            button_work.setBackgroundResource(R.drawable.main_button_job);
 
             //Задаём иконке кнопки то, чтобы она была по центру и размер выравнивался по высоте
             button_work.setScaleType(ImageButton.ScaleType.FIT_CENTER);
