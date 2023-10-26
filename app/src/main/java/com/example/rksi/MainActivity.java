@@ -6,7 +6,6 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
-import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
@@ -25,8 +24,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
     private DatabaseReference TiketsBD;
     List<Tiket> list;
+    List<String> keys;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,14 +59,17 @@ public class MainActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance();
         TiketsBD = mDatabase.getReference("TICKETS");
         list = new ArrayList<>();
+        keys = new ArrayList<>();
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
+                keys.clear();
                 for (DataSnapshot ds : snapshot.getChildren()){
                     Tiket tiket = ds.getValue(Tiket.class);
                     if(tiket != null){
                         list.add(tiket);
+                        keys.add(ds.getKey());
                     }
                 }
                 Refresh();
@@ -133,6 +134,14 @@ public class MainActivity extends AppCompatActivity {
         }
         //Добавляем лайаут в окно прокрутки
         scrollView.addView(lay);
+    }
+
+    public void OpenJobWindow(String key){
+        ScrollView ProfileView = findViewById(R.id.profile_scroll);
+        ProfileView.setVisibility(ScrollView.INVISIBLE);
+
+        ScrollView JobsView = findViewById(R.id.jobs_scroll);
+        JobsView.setVisibility(ScrollView.INVISIBLE);
     }
 
     public void Jobs(View view) {
