@@ -61,13 +61,19 @@
             android:background="@color/w_gray"
             />
 
-        <ImageButton
-            android:id="@+id/btn"
+        <Button
+            android:id="@+id/btn_tick"
             android:layout_width="150dp"
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:background="@drawable/botton_work"
+            android:text="Сделать тикет"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            android:fontFamily="@font/font"
             android:onClick="create_tiket"
             />
 
@@ -80,19 +86,6 @@
             android:background="@drawable/botton_work"
             android:onClick="login"
             />
-
-        <TextView
-            android:id="@+id/viev"
-            android:layout_width="140dp"
-            android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:text="Сделать тикет"
-            android:textStyle="bold"
-            android:textAlignment="textStart"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:fontFamily="@font/font"/>
 
         <RelativeLayout
             android:id="@+id/jabs_lay"

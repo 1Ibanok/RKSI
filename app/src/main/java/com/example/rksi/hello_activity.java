@@ -41,7 +41,7 @@ public class hello_activity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_IMMERSIVE;
         decorView.setSystemUiVisibility(uiOptions);
 
-        sharedPreferences = this.getPreferences(this.MODE_PRIVATE);
+        sharedPreferences = this.getSharedPreferences("user_data", this.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
         auth = FirebaseAuth.getInstance();
@@ -78,9 +78,17 @@ public class hello_activity extends AppCompatActivity {
                                 .setDisplayName(user_data)
                                 .setPhotoUri(null)
                                 .build();
-                        user.updateProfile(profileUpdates);
-
-                        LogIn();
+                        user.updateProfile(profileUpdates).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                LogIn();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                user.delete();
+                            }
+                        });
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -92,7 +100,7 @@ public class hello_activity extends AppCompatActivity {
         });
     }
 
-    public void Log(){
+    public void Log(View view){
         EditText Email = findViewById(R.id.email_login);
         EditText Password = findViewById(R.id.password_login);
 

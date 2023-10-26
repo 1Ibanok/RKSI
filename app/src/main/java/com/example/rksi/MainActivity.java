@@ -6,6 +6,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
@@ -38,7 +39,9 @@ public class MainActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_LOW_PROFILE
                 | View.SYSTEM_UI_FLAG_IMMERSIVE;
         decorView.setSystemUiVisibility(uiOptions);
-        SharedPreferences sharedPref = this.getPreferences(this.MODE_PRIVATE);
+
+        SharedPreferences sharedPref = this.getSharedPreferences("user_data", this.MODE_PRIVATE);
+        Button button = findViewById(R.id.btn_tick);
         user = User.FromJson(sharedPref.getString("user_data", ""));
 
         //Находим размеры дисплея
@@ -147,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
     public void Jobs(View view) {
         ScrollView ProfileView = findViewById(R.id.profile_scroll);
         ProfileView.setVisibility(ScrollView.INVISIBLE);
+
         ScrollView JobsView = findViewById(R.id.jobs_scroll);
         JobsView.setVisibility(ScrollView.VISIBLE);
     }
@@ -159,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
     public void login(View view) {
         Intent intent = new Intent(MainActivity.this, hello_activity.class);
         startActivity(intent);
+        finish();
     }
 
     public void Profile(View view) {
