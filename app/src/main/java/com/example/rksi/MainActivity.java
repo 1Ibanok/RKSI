@@ -12,8 +12,11 @@ import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -191,5 +194,18 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, hello_activity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void DeleteAccount(View view) {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user_a = auth.getCurrentUser();
+        user_a.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Intent intent = new Intent(MainActivity.this, hello_activity.class);
+                startActivity(intent);
+                MainActivity.this.finish();
+            }
+        });
     }
 }
