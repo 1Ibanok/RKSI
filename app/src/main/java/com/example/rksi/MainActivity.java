@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private int height;
     private User user;
 
-    private DatabaseReference mDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_IMMERSIVE;
         decorView.setSystemUiVisibility(uiOptions);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         //Находим размеры дисплея
         Display display = getWindowManager().getDefaultDisplay();
@@ -83,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             ImageButton button_work = new ImageButton(this);
 
             //Задаём ей изобрадене заднего фона
-            button_work.setBackgroundResource(R.drawable.botton_work);
+            button_work.setBackgroundResource(R.drawable.main_button_job);
 
             //Задаём иконке кнопки то, чтобы она была по центру и размер выравнивался по высоте
             button_work.setScaleType(ImageButton.ScaleType.FIT_CENTER);
@@ -194,7 +192,6 @@ public class MainActivity extends AppCompatActivity {
         EmailView.setText("Почта: " + user.email);
         PhoneView.setText("Телефон: " + user.phone);
     }
-
     public void LogOut(View view) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         auth.signOut();
