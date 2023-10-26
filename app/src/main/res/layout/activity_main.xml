@@ -134,41 +134,46 @@
                             android:textColor="@color/black"
                             android:textSize="40sp"
                             android:fontFamily="@font/font"/>
+
                         <TextView
                             android:id="@+id/user_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="40dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
                             android:layout_marginBottom="15dp"
+                            android:fontFamily="@font/font"
                             android:text="Иванов Владимир Олегович"
-                            android:textStyle="italic"
                             android:textAlignment="textStart"
                             android:textColor="@color/black"
-                            android:textSize="30sp"
-                            android:fontFamily="@font/font"/>
+                            android:textSize="30sp" />
                         <TextView
                             android:id="@+id/user_email"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="40dp"
-                            android:layout_marginBottom="15dp"
+                            android:layout_marginTop="90dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
                             android:text="volodya.ivan@rksi.sosat"
                             android:textStyle="bold"
                             android:textAlignment="textStart"
                             android:textColor="@color/black"
-                            android:textSize="30sp"
+                            android:textSize="20sp"
                             android:fontFamily="@font/font"/>
                         <TextView
                             android:id="@+id/user_phone"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="40dp"
-                            android:layout_marginBottom="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
                             android:text="+7(***)***-**-**"
                             android:textStyle="bold"
                             android:textAlignment="textStart"
                             android:textColor="@color/black"
-                            android:textSize="30sp"
+                            android:textSize="20sp"
                             android:fontFamily="@font/font"/>
                     </GridLayout>
 
@@ -204,6 +209,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
                             android:background="@drawable/botton_work"
+                            android:color="@color/gray"
                             android:text="Выйти из аккаунта"
                             android:textStyle="bold"
                             android:textAlignment="center"

@@ -109,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Refresh(View view){
+
+
         //Находим окно прокрутки
         ScrollView scrollView = findViewById(R.id.jobs_scroll);
 
@@ -189,8 +191,8 @@ public class MainActivity extends AppCompatActivity {
         user = User.FromJson(sharedPref.getString("user_data1", ""));
 
         NameView.setText(user.second_name + " " + user.first_name);
-        EmailView.setText(user.email);
-        PhoneView.setText(user.phone);
+        EmailView.setText("Почта: " + user.email);
+        PhoneView.setText("Телефон: " + user.phone);
     }
 
     public void LogOut(View view) {
