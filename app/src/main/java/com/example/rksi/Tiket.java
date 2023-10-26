@@ -27,6 +27,6 @@ public class Tiket {
         return doing_by;
     }
     public void setDoing_by(String doingBy){
-        this.email_user = doingBy;
+        this.doing_by = doingBy;
     }
 }

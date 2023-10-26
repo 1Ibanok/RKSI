@@ -85,12 +85,14 @@ public class MainActivity extends AppCompatActivity {
                         if (tiket != null) {
                             list.add(tiket);
                             keys.add(ds.getKey());
+                            Log.i("sdgkl;gfkgl''",tiket.getEmail_user());
                             if (tiket.getEmail_user() == user.email) {
                                 your_tikets.add(tiket);
                             }
                         }
                     }
                 }
+                Log.i("sdgkl;gfkgl''",your_tikets.toString());
                 Refresh();
             }
 
