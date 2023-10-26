@@ -82,7 +82,8 @@
                 android:layout_marginTop="398dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/job_button" />
+                android:background="@drawable/job_button"
+                android:onClick="AcceptTiket"/>
 
         </RelativeLayout>
     </RelativeLayout>

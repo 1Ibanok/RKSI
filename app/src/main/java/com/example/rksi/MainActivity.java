@@ -142,6 +142,8 @@ public class MainActivity extends AppCompatActivity {
         scrollView.addView(lay);
     }
 
+
+
     public void Jobs(View view) {
         ScrollView ProfileView = findViewById(R.id.profile_scroll);
         ProfileView.setVisibility(ScrollView.INVISIBLE);
@@ -149,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
         JobsView.setVisibility(ScrollView.VISIBLE);
     }
 
-    public void Create_tiket(View view) {
+    public void create_tiket(View view) {
         Intent intent = new Intent(MainActivity.this, create_tiket.class);
         startActivity(intent);
     }

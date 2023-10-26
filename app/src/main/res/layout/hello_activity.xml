@@ -156,7 +156,7 @@
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/main_botton"
+                    android:background="@drawable/mini_button"
                     android:onClick="toLogin"/>
             </GridLayout>
 
