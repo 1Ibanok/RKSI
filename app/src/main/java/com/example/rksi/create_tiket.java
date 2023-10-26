@@ -52,7 +52,10 @@ public class create_tiket extends Activity {
         User user = User.FromJson(sharedPref.getString("user_data1", ""));
         String email_user = user.email;
 
-        Tiket tiket = new Tiket(name_tiket, describtion_tiket, email_user);
+        Tiket tiket = new Tiket();
+        tiket.setName(name_tiket);
+        tiket.setDescription(describtion_tiket);
+        tiket.setEmail_user(email_user);
 
         TiketsBD.push().setValue(tiket).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

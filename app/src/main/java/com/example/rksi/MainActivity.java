@@ -19,10 +19,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private int height;
     private User user;
 
-    private DatabaseReference mDatabase;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference TiketsBD;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +57,8 @@ public class MainActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_IMMERSIVE;
         decorView.setSystemUiVisibility(uiOptions);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
+        mDatabase = FirebaseDatabase.getInstance();
+        TiketsBD = mDatabase.getReference("TICKETS");
         //Находим размеры дисплея
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -63,7 +70,32 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private List<Tiket> getTiketsFromBD(){
+        List<Tiket> list = new ArrayList<>();
+        ValueEventListener listener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    Tiket tiket = ds.getValue(Tiket.class);
+                    if(tiket != null){
+                        list.add(tiket);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        TiketsBD.addValueEventListener(listener);
+        return  list;
+    }
+
     public void Refresh(){
+
+        List<Tiket> list = getTiketsFromBD();
+
         //Находим окно прокрутки
         ScrollView scrollView = findViewById(R.id.jobs_scroll);
 
@@ -73,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         //Задаём то, что контент сортируется по вертикали
         lay.setOrientation(GridLayout.VERTICAL);
         lay.removeAllViews();
-        for (int i = 0; i < 60; i++){
+        for (int i = 0; i < list.size(); i++){
 
             //Создаём переменную отвечающую за индекс кнопки
             //(почему-то просто из цикла переменные не перевариваются)
