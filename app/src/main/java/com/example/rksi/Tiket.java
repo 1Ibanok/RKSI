@@ -1,5 +1,7 @@
 package com.example.rksi;
 
+import android.util.Log;
+
 public class Tiket {
     public String name;
     public String description;
@@ -28,5 +30,21 @@ public class Tiket {
     }
     public void setDoing_by(String doingBy){
         this.doing_by = doingBy;
+    }
+
+    public boolean isMine(String check){
+        if (check.length() != email_user.length())
+            return false;
+        int matches = 0;
+        for (int i = 0; i < check.length(); i++){
+            if(check.charAt(i) == email_user.charAt(i))
+                matches++;
+
+            Log.i("asdasdasfa", "|"+ matches);
+        }
+        if(matches == check.length())
+            return true;
+
+        return false;
     }
 }
