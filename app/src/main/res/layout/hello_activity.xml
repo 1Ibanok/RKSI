@@ -146,7 +146,8 @@
                     android:layout_marginRight="30dp"
                     android:layout_marginTop="60dp"
                     android:background="@drawable/job_button"
-                    android:contentDescription="@android:string/no"/>
+                    android:contentDescription="@android:string/no"
+                    android:onClick="Reg"/>
 
                 <ImageButton
                     android:id="@+id/button_to_login"
@@ -156,7 +157,7 @@
                     android:layout_marginRight="30dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/main_botton"
-                    android:onClick="Login"/>
+                    android:onClick="toLogin"/>
             </GridLayout>
 
             <GridLayout
@@ -220,7 +221,8 @@
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
                     android:layout_marginTop="60dp"
-                    android:background="@drawable/job_button" />
+                    android:background="@drawable/job_button"
+                    android:onClick="Log"/>
 
                 <ImageButton
                     android:id="@+id/to_registration"
@@ -230,7 +232,7 @@
                     android:layout_marginRight="30dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/main_botton"
-                    android:onClick="Registration"/>
+                    android:onClick="toRegistration"/>
             </GridLayout>
 
         </RelativeLayout>
