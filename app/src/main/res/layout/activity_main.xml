@@ -209,7 +209,24 @@
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="40sp"
-                            android:fontFamily="@font/font"/>
+                            android:fontFamily="@font/font">
+                        </TextView>
+                        <Button
+                            android:id="@+id/btn_show_yours"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:background="@drawable/botton_work"
+                            android:color="@color/gray"
+                            android:text="Ваши тикеты"
+                            android:textStyle="bold"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:fontFamily="@font/font"
+                            android:onClick="ShowYourTickets"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            />
 
                     </GridLayout>
 
@@ -268,6 +285,13 @@
                             />
                     </GridLayout>
                 </GridLayout>
+            </ScrollView>
+
+            <ScrollView
+                android:id="@+id/your_scroll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible">
             </ScrollView>
         </RelativeLayout>
     </RelativeLayout>

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -66,8 +67,10 @@ public class MainActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance();
         TiketsBD = mDatabase.getReference("TICKETS");
+        user = User.FromJson(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
         list = new ArrayList<>();
         keys = new ArrayList<>();
+        your_tikets = new ArrayList<>();
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -246,6 +249,9 @@ public class MainActivity extends AppCompatActivity {
         ScrollView JobsView = findViewById(R.id.jobs_scroll);
         JobsView.setVisibility(ScrollView.INVISIBLE);
 
+        ScrollView scrollView = findViewById(R.id.your_scroll);
+        scrollView.setVisibility(ScrollView.INVISIBLE);
+
         ScrollView ProfileView = findViewById(R.id.profile_scroll);
         ProfileView.setVisibility(ScrollView.VISIBLE);
 
@@ -303,5 +309,90 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.finish();
             }
         });
+    }
+
+    public void ShowTickets() {
+        ScrollView ProfileView = findViewById(R.id.profile_scroll);
+        ProfileView.setVisibility(ScrollView.INVISIBLE);
+
+        //Находим окно прокрутки
+        ScrollView scrollView = findViewById(R.id.your_scroll);
+        scrollView.setVisibility(ScrollView.VISIBLE);
+        scrollView.removeAllViews();
+        //Создаём лайаут сетки
+        GridLayout lay = new GridLayout(this);
+
+        //Задаём то, что контент сортируется по вертикали
+        lay.setOrientation(GridLayout.VERTICAL);
+        lay.removeAllViews();
+        Button button = new Button(this);
+
+        button.setOnClickListener(v -> UpdateProfile());
+        button.setText("Назад");
+
+        GridLayout.LayoutParams params_b = new GridLayout.LayoutParams();
+        params_b.width = width - 300;
+        params_b.height = 50;
+        params_b.setMargins(10, 10, 10, 10);
+
+        lay.addView(button, params_b);
+        for (int i = 0; i < your_tikets.size(); i++){
+
+            Tiket tiket = your_tikets.get(i);
+
+            RelativeLayout rlay = new RelativeLayout(this);
+
+            //Создаём переменную отвечающую за индекс кнопки
+            //(почему-то просто из цикла переменные не перевариваются)
+            int index = i;
+
+            //Создаём новую кнопку
+            ImageButton button_work = new ImageButton(this);
+
+            //Задаём ей изобрадене заднего фона
+            if (tiket.doing_by == "") {
+                button_work.setBackgroundResource(R.drawable.main_button_job_active);
+            } else button_work.setBackgroundResource(R.drawable.main_button_job_neactive);
+
+
+            //Задаём иконке кнопки то, чтобы она была по центру и размер выравнивался по высоте
+            button_work.setScaleType(ImageButton.ScaleType.FIT_CENTER);
+
+            //Задаём этой кнопку функци
+            button_work.setOnClickListener(v -> {
+                int x = index;
+            });
+
+            //Параметры размера и выравнивания кнопки
+            GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+            params.width = width - 30;
+            params.height = 400;
+            params.setMargins(10, 10, 10, 10);
+
+            //Добавляем кнопку в лейаут
+            rlay.addView(button_work, params);
+            TextView name = new TextView(this);
+            TextView contakt = new TextView(this);
+
+            name.setText(tiket.name);
+            contakt.setText("Контакт: " + tiket.email_user);
+
+            params.setMargins(20, 0, 5, 5);
+            name.setTextSize(35);
+            name.setTextColor(R.color.black);
+
+            int name_height = name.getHeight();
+            int name_width = name.getWidth();
+
+            rlay.addView(name, params);
+
+            lay.addView(rlay);
+        }
+        //Добавляем лайаут в окно прокрутки
+        scrollView.addView(lay);
+    }
+
+    public void ShowYourTickets(View view) {
+        ShowTickets();
     }
 }
