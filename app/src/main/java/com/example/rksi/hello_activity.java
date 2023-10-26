@@ -108,7 +108,9 @@ public class hello_activity extends AppCompatActivity {
         String password = Password.getText().toString();
 
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
-            LogIn();
+            if(auth.getCurrentUser().isEmailVerified()) {
+                LogIn();
+            }
         });
     }
 
@@ -129,7 +131,9 @@ public class hello_activity extends AppCompatActivity {
     }
 
     public void LogIn(){
-        editor.putString("user_data", user.getDisplayName());
+        user = auth.getCurrentUser();
+        editor.putString("user_data1", user.getDisplayName());
+        editor.commit();
         Intent intent = new Intent(hello_activity.this, MainActivity.class);
         startActivity(intent);
         finish();

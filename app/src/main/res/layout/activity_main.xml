@@ -192,6 +192,24 @@
                             android:fontFamily="@font/font"/>
 
                     </GridLayout>
+
+                    <Button
+                        android:id="@+id/btn_LogOut"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/botton_work"
+                        android:text="Выйти из аккаунта"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/font"
+                        android:onClick="LogOut"
+                        >
+
+                    </Button>
                 </GridLayout>
             </ScrollView>
         </RelativeLayout>

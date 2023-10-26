@@ -14,13 +14,16 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
     private int width;
     private int height;
-    User user;
+    private User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,10 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_LOW_PROFILE
                 | View.SYSTEM_UI_FLAG_IMMERSIVE;
         decorView.setSystemUiVisibility(uiOptions);
-
-        SharedPreferences sharedPref = this.getSharedPreferences("user_data", this.MODE_PRIVATE);
         Button button = findViewById(R.id.btn_tick);
-        user = User.FromJson(sharedPref.getString("user_data", ""));
 
         //Находим размеры дисплея
         Display display = getWindowManager().getDefaultDisplay();
@@ -177,8 +177,19 @@ public class MainActivity extends AppCompatActivity {
         TextView EmailView = findViewById(R.id.user_email);
         TextView PhoneView = findViewById(R.id.user_phone);
 
+        SharedPreferences sharedPref = this.getSharedPreferences("user_data", this.MODE_PRIVATE);
+        user = User.FromJson(sharedPref.getString("user_data1", ""));
+
         NameView.setText(user.second_name + " " + user.first_name);
         EmailView.setText(user.email);
         PhoneView.setText(user.phone);
+    }
+
+    public void LogOut(View view) {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        auth.signOut();
+        Intent intent = new Intent(MainActivity.this, hello_activity.class);
+        startActivity(intent);
+        finish();
     }
 }
