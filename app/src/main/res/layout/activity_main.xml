@@ -68,7 +68,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:background="@drawable/botton_work"
-            android:onClick="Create_tiket"
+            android:onClick="create_tiket"
             />
 
         <ImageButton

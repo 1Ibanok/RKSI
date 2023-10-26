@@ -49,7 +49,7 @@ public class hello_activity extends AppCompatActivity {
         decorView.setSystemUiVisibility(uiOptions);
     }
 
-    public ArrayList<User> GetAllUsers(View view){
+    public void GetAllUsers(View view){
         UsersBD = FirebaseDatabase.getInstance("https://rksi-2e196-default-rtdb.europe-west1.firebasedatabase.app/").getReference(USER_KEY);
         ArrayList<User> Users = new ArrayList<>();
         ValueEventListener vListener = new ValueEventListener() {
@@ -105,8 +105,9 @@ public class hello_activity extends AppCompatActivity {
         });
     }
 
-    public void Log(){
-
+    public void Log(View view){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     public void toLogin(View view) {
