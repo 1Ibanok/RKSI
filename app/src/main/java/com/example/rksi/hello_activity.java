@@ -1,33 +1,26 @@
 package com.example.rksi;
 
 import android.content.Intent;
-import android.graphics.Point;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.GridLayout;
-import android.widget.ImageButton;
-import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.Firebase;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class hello_activity extends AppCompatActivity {
-
-    private String USER_KEY = "User";
-    public DatabaseReference UsersBD;
-
-
+    private FirebaseAuth auth;
+    private FirebaseUser user;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,27 +40,16 @@ public class hello_activity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_LOW_PROFILE
                 | View.SYSTEM_UI_FLAG_IMMERSIVE;
         decorView.setSystemUiVisibility(uiOptions);
-    }
 
-    public ArrayList<User> GetAllUsers(View view){
-        UsersBD = FirebaseDatabase.getInstance("https://rksi-2e196-default-rtdb.europe-west1.firebasedatabase.app/").getReference(USER_KEY);
-        ArrayList<User> Users = new ArrayList<>();
-        ValueEventListener vListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds : snapshot.getChildren()){
-                    User user = ds.getValue(User.class);
-                    Users.add(user);
-                }
+        sharedPreferences = this.getPreferences(this.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
-            }
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Все плохо
-            }
-
-        };
+        if(user!=null && user.isEmailVerified()){
+            LogIn();
+        }
     }
 
     public void Reg(View view){
@@ -77,36 +59,49 @@ public class hello_activity extends AppCompatActivity {
         EditText Phone = findViewById(R.id.phone);
         EditText Password = findViewById(R.id.password);
 
-        UsersBD = FirebaseDatabase.getInstance("https://rksi-2e196-default-rtdb.europe-west1.firebasedatabase.app/").getReference(USER_KEY);
-
-        String first_name = First_name.getText().toString();
-        String second_name = Second_name.getText().toString();
         String email = Email.getText().toString();
-        String phone = Phone.getText().toString();
         String password = Password.getText().toString();
-        User newUser = new User(first_name, second_name, email, phone, password);
 
-        UsersBD.push().setValue(newUser);
-        UsersBD.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                // Сделать уведомлние что все хорошо
+        User user_parse = new User(First_name.getText().toString(),
+                Second_name.getText().toString(),
+                email, Phone.getText().toString(), password);
 
-                GridLayout registration = findViewById(R.id.registration);
-                registration.setVisibility(GridLayout.INVISIBLE);
+        String user_data = User.Export(user_parse);
 
-                GridLayout login = findViewById(R.id.login);
-                login.setVisibility(GridLayout.VISIBLE);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Сделать уведомлние что все плохо
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
+            if(task.isSuccessful()){
+                user = auth.getCurrentUser();
+                user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                .setDisplayName(user_data)
+                                .setPhotoUri(null)
+                                .build();
+                        user.updateProfile(profileUpdates);
+
+                        LogIn();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        user.delete();
+                    }
+                });
             }
         });
     }
 
     public void Log(){
+        EditText Email = findViewById(R.id.email_login);
+        EditText Password = findViewById(R.id.password_login);
 
+        String email = Email.getText().toString();
+        String password = Password.getText().toString();
+
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
+            LogIn();
+        });
     }
 
     public void toLogin(View view) {
@@ -125,4 +120,10 @@ public class hello_activity extends AppCompatActivity {
         registration.setVisibility(GridLayout.VISIBLE);
     }
 
+    public void LogIn(){
+        editor.putString("user_data", user.getDisplayName());
+        Intent intent = new Intent(hello_activity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

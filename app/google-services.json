@@ -1,32 +1,14 @@
 {
   "project_info": {
-    "project_number": "983527652455",
-    "project_id": "rksi-930c1",
-    "storage_bucket": "rksi-930c1.appspot.com"
+    "project_number": "266211952403",
+    "firebase_url": "https://rksi-2e196-default-rtdb.europe-west1.firebasedatabase.app/",
+    "project_id": "rksi-2e196",
+    "storage_bucket": "rksi-2e196.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:983527652455:android:d957ad219396bcdbd928c2",
-        "android_client_info": {
-          "package_name": "com.android.application"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBbxWQwSeBG4TyVQWeEjTLEntljqHKC8KI"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:983527652455:android:1a615c588b8db023d928c2",
+        "mobilesdk_app_id": "1:266211952403:android:9c982d0b2c998223bd7ce6",
         "android_client_info": {
           "package_name": "com.example.rksi"
         }
@@ -34,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBbxWQwSeBG4TyVQWeEjTLEntljqHKC8KI"
+          "current_key": "AIzaSyCOB-04uRDgAGTm6mffMnkQfdiLgGROgIY"
         }
       ],
       "services": {

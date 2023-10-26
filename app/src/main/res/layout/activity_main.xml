@@ -142,6 +142,7 @@
                             android:textSize="40sp"
                             android:fontFamily="@font/font"/>
                         <TextView
+                            android:id="@+id/user_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="40dp"
@@ -153,6 +154,7 @@
                             android:textSize="30sp"
                             android:fontFamily="@font/font"/>
                         <TextView
+                            android:id="@+id/user_email"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="40dp"
@@ -164,6 +166,7 @@
                             android:textSize="30sp"
                             android:fontFamily="@font/font"/>
                         <TextView
+                            android:id="@+id/user_phone"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="40dp"
@@ -184,6 +187,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp">
                         <TextView
+                            android:id="@+id/current_job"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
