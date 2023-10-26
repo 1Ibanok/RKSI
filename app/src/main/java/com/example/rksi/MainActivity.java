@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference TiketsBD;
+    List<Tiket> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +60,27 @@ public class MainActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance();
         TiketsBD = mDatabase.getReference("TICKETS");
+        list = new ArrayList<>();
+        ValueEventListener listener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    Tiket tiket = ds.getValue(Tiket.class);
+                    if(tiket != null){
+                        list.add(tiket);
+                    }
+                }
+                Refresh();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        TiketsBD.addValueEventListener(listener);
+
         //Находим размеры дисплея
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -72,33 +94,15 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Tiket> getTiketsFromBD(){
         List<Tiket> list = new ArrayList<>();
-        ValueEventListener listener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds : snapshot.getChildren()){
-                    Tiket tiket = ds.getValue(Tiket.class);
-                    if(tiket != null){
-                        list.add(tiket);
-                    }
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        };
-        TiketsBD.addValueEventListener(listener);
         return  list;
     }
 
     public void Refresh(){
 
-        List<Tiket> list = getTiketsFromBD();
-
         //Находим окно прокрутки
         ScrollView scrollView = findViewById(R.id.jobs_scroll);
-
+        scrollView.removeAllViews();
         //Создаём лайаут сетки
         GridLayout lay = new GridLayout(this);
 
