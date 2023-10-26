@@ -1,11 +1,13 @@
 package com.example.rksi;
 
 public class Tiket {
-    public String name, describtion, email_user;
+    private String name;
+    private String description;
+    private String email_user;
 
-    public Tiket(String name_, String describtion_, String email_user_) {
+    public Tiket(String name_, String description_, String email_user_) {
         this.name = name_;
-        this.describtion = describtion_;
+        this.description = description_;
         this.email_user = email_user_;
     }
 }
