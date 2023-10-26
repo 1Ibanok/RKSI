@@ -1,14 +1,17 @@
 package com.example.rksi;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -139,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
+    @SuppressLint("ResourceAsColor")
     public void Refresh(){
 
         //Находим окно прокрутки
@@ -152,6 +156,10 @@ public class MainActivity extends AppCompatActivity {
         lay.removeAllViews();
         for (int i = 0; i < list.size(); i++){
 
+            Tiket tiket = list.get(i);
+
+            RelativeLayout rlay = new RelativeLayout(this);
+
             //Создаём переменную отвечающую за индекс кнопки
             //(почему-то просто из цикла переменные не перевариваются)
             int index = i;
@@ -160,7 +168,10 @@ public class MainActivity extends AppCompatActivity {
             ImageButton button_work = new ImageButton(this);
 
             //Задаём ей изобрадене заднего фона
-            button_work.setBackgroundResource(R.drawable.main_button_job);
+            if (tiket.doing_by == "") {
+                button_work.setBackgroundResource(R.drawable.main_button_job_active);
+            } else button_work.setBackgroundResource(R.drawable.main_button_job_neactive);
+
 
             //Задаём иконке кнопки то, чтобы она была по центру и размер выравнивался по высоте
             button_work.setScaleType(ImageButton.ScaleType.FIT_CENTER);
@@ -182,7 +193,23 @@ public class MainActivity extends AppCompatActivity {
             params.setMargins(10, 10, 10, 10);
 
             //Добавляем кнопку в лейаут
-            lay.addView(button_work, params);
+            rlay.addView(button_work, params);
+            TextView name = new TextView(this);
+            TextView contakt = new TextView(this);
+
+            name.setText(tiket.name);
+            contakt.setText("Контакт: " + tiket.email_user);
+
+            params.setMargins(20, 0, 5, 5);
+            name.setTextSize(35);
+            name.setTextColor(R.color.black);
+
+            int name_height = name.getHeight();
+            int name_width = name.getWidth();
+
+            rlay.addView(name, params);
+
+            lay.addView(rlay);
         }
         //Добавляем лайаут в окно прокрутки
         scrollView.addView(lay);
