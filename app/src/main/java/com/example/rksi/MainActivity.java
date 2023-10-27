@@ -120,10 +120,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void DenyTicketFunk(){
         user = User.FromJson(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
-        if(user.id_job != "") {
+        if(!user.id_job.trim().isEmpty()) {
             TiketsBD.child(user.id_job).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                 @Override
                 public void onSuccess(DataSnapshot dataSnapshot) {
+                    Log.i("ksdfksdjf", user.id_job);
                     if(dataSnapshot.getValue(Tiket.class) != null) {
                         Tiket tiket = dataSnapshot.getValue(Tiket.class);
                         tiket.setDoing_by("");
@@ -148,11 +149,29 @@ public class MainActivity extends AppCompatActivity {
 
                         OpenJobs();
                     }
+
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
+                    user.id_job = "";
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                            .setDisplayName(User.Export(user))
+                            .setPhotoUri(null)
+                            .build();
+                    FirebaseAuth.getInstance().getCurrentUser().updateProfile(profileUpdates).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
 
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
+
+                    OpenJobs();
                 }
             });
         }
@@ -305,14 +324,31 @@ public class MainActivity extends AppCompatActivity {
 
         CurrentJob.setText("Текущее задание:\nОтсутствует");
 
-        if(user.id_job != ""){
+        if(!user.id_job.isEmpty()){
             TiketsBD.child(user.id_job).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                 @Override
                 public void onSuccess(DataSnapshot dataSnapshot) {
-                    if(dataSnapshot.getValue(Tiket.class).getName() != null) {
+                    if(dataSnapshot.getValue(Tiket.class) != null){
                         CurrentJob.setText("Текущее задание:\n" + dataSnapshot.getValue(Tiket.class).getName());
                     }
                     else{
+
+                        user.id_job = "";
+                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                .setDisplayName(User.Export(user))
+                                .setPhotoUri(null)
+                                .build();
+                        FirebaseAuth.getInstance().getCurrentUser().updateProfile(profileUpdates).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+
+                            }
+                        });
                         CurrentJob.setText("Текущее задание:\nОтсутствует");
                     }
                 }
