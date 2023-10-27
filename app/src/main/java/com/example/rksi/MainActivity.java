@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     List<Tiket> list;
     List<Tiket> your_tikets;
     List<String> keys;
+
+    List<String> your_keys;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         list = new ArrayList<>();
         keys = new ArrayList<>();
         your_tikets = new ArrayList<>();
+        your_keys = new ArrayList<>();
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -77,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 list.clear();
                 keys.clear();
                 your_tikets.clear();
+                your_keys.clear();
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     if (ds.getValue().toString().trim() != "") {
                         Tiket tiket;
@@ -86,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                             keys.add(ds.getKey());
                             if(tiket.isMine(user.email)){
                                 your_tikets.add(tiket);
+                                your_keys.add(ds.getKey());
                             }
                         }
                     }
@@ -140,6 +145,24 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
 
+                        OpenJobs();
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                }
+            });
+        }
+    }
+    public void DeleteTicketFunk(String id){
+        if(id != "") {
+            TiketsBD.child(id).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                @Override
+                public void onSuccess(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.getValue(Tiket.class) != null) {
+                        TiketsBD.child(id).removeValue();
                         OpenJobs();
                     }
                 }
@@ -234,6 +257,9 @@ public class MainActivity extends AppCompatActivity {
 
         ScrollView JobsView = findViewById(R.id.jobs_scroll);
         JobsView.setVisibility(ScrollView.VISIBLE);
+
+        ScrollView YourScroll = findViewById(R.id.your_scroll);
+        YourScroll.setVisibility(ScrollView.INVISIBLE);
     }
 
     public void create_tiket(View view) {
@@ -367,6 +393,7 @@ public class MainActivity extends AppCompatActivity {
             //Задаём этой кнопку функци
             button_work.setOnClickListener(v -> {
                 int x = index;
+                DeleteTicketFunk(your_keys.get(x));
             });
 
             //Параметры размера и выравнивания кнопки
@@ -380,7 +407,7 @@ public class MainActivity extends AppCompatActivity {
             TextView name = new TextView(this);
             TextView contakt = new TextView(this);
 
-            name.setText(tiket.name);
+            name.setText("Удалить тикет: " + tiket.name);
             contakt.setText("Контакт: " + tiket.email_user);
 
             params.setMargins(20, 0, 5, 5);
