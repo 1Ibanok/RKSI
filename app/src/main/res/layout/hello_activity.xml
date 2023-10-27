@@ -144,26 +144,29 @@
                     android:inputType="textPassword"
                     />
 
-                <ImageButton
+                <Button
                     android:id="@+id/button_registration"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
                     android:layout_marginTop="60dp"
                     android:background="@drawable/job_button"
                     android:contentDescription="@android:string/no"
-                    android:onClick="Reg"/>
+                    android:onClick="Reg"
+                    android:text="Зарегистрироваться"
+                    android:textSize="25sp"/>
 
-                <ImageButton
+                <Button
                     android:id="@+id/button_to_login"
-                    android:layout_width="100dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/mini_button"
-                    android:onClick="toLogin"/>
+                    android:onClick="toLogin"
+                    android:text="Авторизация"/>
 
                 <TextView
                     android:id="@+id/registration_failed_text"
@@ -173,8 +176,7 @@
                     android:layout_marginRight="30dp"
                     android:layout_marginTop="-30dp"
                     android:textColor="@color/red"
-                    android:textSize="10sp"
-                    android:onClick="toLogin"/>
+                    android:textSize="10sp" />
             </GridLayout>
 
             <GridLayout
@@ -233,25 +235,29 @@
                     android:inputType="textPassword"
                     />
 
-                <ImageButton
+                <Button
                     android:id="@+id/button_login"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
                     android:layout_marginTop="60dp"
                     android:background="@drawable/job_button"
-                    android:onClick="Log"/>
+                    android:onClick="Log"
+                    android:textSize="25sp"
+                    android:text="Войти в аккаунт"/>
 
-                <ImageButton
+                <Button
                     android:id="@+id/to_registration"
-                    android:layout_width="100dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/main_botton"
-                    android:onClick="toRegistration"/>
+                    android:background="@drawable/mini_button"
+                    android:onClick="toRegistration"
+                    android:text="Регистрация"
+                    />
                 <TextView
                     android:id="@+id/login_failed_text"
                     android:layout_width="match_parent"
@@ -261,7 +267,7 @@
                     android:layout_marginTop="-30dp"
                     android:textColor="@color/red"
                     android:textSize="10sp"
-                    android:onClick="toLogin"/>
+                    />
             </GridLayout>
 
         </RelativeLayout>

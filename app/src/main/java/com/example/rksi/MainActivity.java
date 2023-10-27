@@ -384,16 +384,8 @@ public class MainActivity extends AppCompatActivity {
             //Создаём новую кнопку
             ImageButton button_work = new ImageButton(this);
 
-            //Задаём ей изобрадене заднего фона
-            if (Objects.equals(tiket.doing_by, "")) {
-                button_work.setBackgroundResource(R.drawable.main_button_job_active);
-            } else if (!Objects.equals(tiket.doing_by, "")) {
-                button_work.setBackgroundResource(R.drawable.main_button_job_neactive);
-            }
 
-
-            //Задаём иконке кнопки то, чтобы она была по центру и размер выравнивался по высоте
-            button_work.setScaleType(ImageButton.ScaleType.FIT_CENTER);
+            button_work.setBackgroundResource(R.drawable.main_button_job);
 
             //Задаём этой кнопку функци
             button_work.setOnClickListener(v -> {
@@ -412,8 +404,16 @@ public class MainActivity extends AppCompatActivity {
             TextView name = new TextView(this);
             TextView contakt = new TextView(this);
 
-            name.setText("Удалить тикет: " + tiket.name);
+            if(tiket.email_user.isEmpty()) {
+                name.setText("Удалить тикет: " + tiket.name);
+            }
+            else {
+                name.setText("Подтвердить выполнение: " + tiket.name);
+            }
+
             contakt.setText("Контакт: " + tiket.email_user);
+
+            name.setTextColor(R.color.black);
 
             params.setMargins(20, 0, 5, 5);
             name.setTextSize(35);
