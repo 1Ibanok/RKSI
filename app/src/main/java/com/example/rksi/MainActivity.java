@@ -34,6 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -199,10 +200,14 @@ public class MainActivity extends AppCompatActivity {
             //Создаём новую кнопку
             ImageButton button_work = new ImageButton(this);
 
+            button_work.setBackgroundResource(R.drawable.main_button_job);
+
             //Задаём ей изобрадене заднего фона
-            if (tiket.doing_by == "") {
+            if (Objects.equals(tiket.doing_by, "")) {
                 button_work.setBackgroundResource(R.drawable.main_button_job_active);
-            } else button_work.setBackgroundResource(R.drawable.main_button_job_neactive);
+            } else if (!Objects.equals(tiket.doing_by, "")) {
+                button_work.setBackgroundResource(R.drawable.main_button_job_neactive);
+            }
 
 
             //Задаём иконке кнопки то, чтобы она была по центру и размер выравнивался по высоте
@@ -236,8 +241,6 @@ public class MainActivity extends AppCompatActivity {
             name.setTextSize(35);
             name.setTextColor(R.color.black);
 
-            int name_height = name.getHeight();
-            int name_width = name.getWidth();
 
             rlay.addView(name, params);
 
@@ -382,9 +385,11 @@ public class MainActivity extends AppCompatActivity {
             ImageButton button_work = new ImageButton(this);
 
             //Задаём ей изобрадене заднего фона
-            if (tiket.doing_by == "") {
+            if (Objects.equals(tiket.doing_by, "")) {
                 button_work.setBackgroundResource(R.drawable.main_button_job_active);
-            } else button_work.setBackgroundResource(R.drawable.main_button_job_neactive);
+            } else if (!Objects.equals(tiket.doing_by, "")) {
+                button_work.setBackgroundResource(R.drawable.main_button_job_neactive);
+            }
 
 
             //Задаём иконке кнопки то, чтобы она была по центру и размер выравнивался по высоте
@@ -412,10 +417,6 @@ public class MainActivity extends AppCompatActivity {
 
             params.setMargins(20, 0, 5, 5);
             name.setTextSize(35);
-            name.setTextColor(R.color.black);
-
-            int name_height = name.getHeight();
-            int name_width = name.getWidth();
 
             rlay.addView(name, params);
 
