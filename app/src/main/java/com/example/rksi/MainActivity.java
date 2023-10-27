@@ -440,11 +440,13 @@ public class MainActivity extends AppCompatActivity {
             TextView name = new TextView(this);
             TextView contakt = new TextView(this);
 
-            if(tiket.email_user.isEmpty()) {
-                name.setText("Удалить тикет: " + tiket.name);
+            if(tiket.getDoing_by().isEmpty()) {
+                name.setText("Удалить тикет:\n" + tiket.name);
+                name.setTextSize(35);
             }
             else {
-                name.setText("Подтвердить выполнение: " + tiket.name);
+                name.setText("Подтвердить:\n" + tiket.name + "\nДля:\n" + tiket.getDoing_by());
+                name.setTextSize(25);
             }
 
             contakt.setText("Контакт: " + tiket.email_user);
@@ -452,7 +454,6 @@ public class MainActivity extends AppCompatActivity {
             name.setTextColor(R.color.black);
 
             params.setMargins(20, 0, 5, 5);
-            name.setTextSize(35);
 
             rlay.addView(name, params);
 
